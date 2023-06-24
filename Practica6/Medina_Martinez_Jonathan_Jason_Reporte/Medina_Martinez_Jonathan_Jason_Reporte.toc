@@ -1,0 +1,23 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Objetivo}{3}{}%
+\contentsline {section}{\numberline {2}Introducción}{3}{}%
+\contentsline {section}{\numberline {3}Desarrollo}{4}{}%
+\contentsline {subsection}{\numberline {3.1}Problema 1}{4}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Programa1.c}{4}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Ejecución}{4}{}%
+\contentsline {subsection}{\numberline {3.2}Problema 2}{5}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Programa2.c}{5}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Ejecución}{6}{}%
+\contentsline {subsection}{\numberline {3.3}Problema 3}{7}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}Programa3.c}{7}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}Ejecución}{8}{}%
+\contentsline {subsection}{\numberline {3.4}Problema 4}{9}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Programa4.c}{9}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Ejecución}{10}{}%
+\contentsline {subsection}{\numberline {3.5}Problema 5}{11}{}%
+\contentsline {subsubsection}{\numberline {3.5.1}Programa5.c}{11}{}%
+\contentsline {subsubsection}{\numberline {3.5.2}Ejecución}{11}{}%
+\contentsline {subsection}{\numberline {3.6}Problema 6}{12}{}%
+\contentsline {subsubsection}{\numberline {3.6.1}Programa6.c}{12}{}%
+\contentsline {subsubsection}{\numberline {3.6.2}Ejecución}{12}{}%
+\contentsline {section}{\numberline {4}Conclusión}{13}{}%

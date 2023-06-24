@@ -1,0 +1,476 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+
+\geometry{letterpaper, margin = 1.5cm}
+
+
+\newcommand{\codefontsize}{\fontsize{12}{12}}
+\lstset{
+	language=C,
+	basicstyle=\codefontsize\ttfamily\color{white},
+	keywordstyle=\color{blue},
+	commentstyle=\color{green},
+	stringstyle=\color{red},
+	numbers=left,
+	numberstyle=\tiny\color{black},
+	stepnumber=1,
+	numbersep=10pt,
+	backgroundcolor=\color{blue!20!black},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=4,
+	captionpos=b,
+	breaklines=true,
+	breakatwhitespace=true,
+	escapeinside={(*@}{@*)},
+	frame=single
+}
+
+%Datos de la Portada
+\title{Introducción a la Programación \ Practica 3}
+\author{Medina Martinez Jonathan Jason \ 2023640061}
+\date{25 de Abril del 2023}
+
+\begin{document} %Inicio del Documento
+	
+	\fontsize{12}{16}\selectfont
+	
+	\begin{figure}[t] %Logos Portada
+		
+		\includegraphics[width=2.5 cm]{Logo1.jpeg}
+		\hfill
+		\includegraphics[width=3 cm]{Logo2.png}
+		
+	\end{figure}
+	
+	\maketitle %Titulo Portada
+	\newpage
+	
+	\tableofcontents %Indice
+	\newpage
+	
+	\section{Objetivo}
+	
+	Desarrollar programas utilizando cadenas para el desplegado de informacion.
+	
+	\section{Introducción}
+	
+	La programación es una herramienta fundamental para el desarrollo de soluciones y el procesamiento de información. En esta práctica nos enfocaremos en el uso de cadenas para el despliegue de información, una habilidad importante en la programación de aplicaciones. A través de seis ejercicios, los cuales incluyen el cálculo del tamaño de una cadena, la identificación de letras repetidas, la separación de una cadena en sus componentes básicos, y la clasificación de caracteres, se busca que el estudiante fortalezca su conocimiento y habilidad en el uso de cadenas.
+	
+	\newpage
+	\section{Desarrollo}
+	Desarrolle los siguientes programas:
+	
+	\subsection{Problema 1}
+	Programa que pida al usuario una cadena de texto y muestre el tamaño de la cadena.
+	No deberá utilizar bibliotecas de funciones adicionales a stdio.h.
+	
+	\subsubsection{Programa1.c}
+	
+	\begin{lstlisting}
+
+/**
+* @file Programa1.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-01
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+
+#include <stdio.h>
+
+int main() {
+	char cadena[100];
+	int n = 0;
+	
+	printf("Ingrese una cadena de texto: ");
+	scanf("%s", cadena);
+	
+	while (cadena[n] != '\0') {
+		n++;
+	}
+	
+	printf("La longitud de la cadena es: %d", n);
+	
+	return 0;
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingrese una cadena de texto: asdasxfasdas
+	La longitud de la cadena es: 12
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese una cadena de texto: asfknjandcjascadbcndljnhvbaksnvhao
+	La longitud de la cadena es: 34
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese una cadena de texto: mfkdamflnsdmlfmfopdfkldskdopvsopvksdov
+	La longitud de la cadena es: 38
+	\end{lstlisting}
+	
+	\newpage
+	
+	\subsection{Problema 2}
+	
+	Programa que solicite al usuario una cadena de texto y muestre el total de palabras, total de letras, total de números y total de caracteres especiales.
+	
+	\subsubsection{Programa2.c}
+	
+	\begin{lstlisting}
+		
+/**
+* @file Programa2.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-01
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+
+#define MAX 100
+
+int main() {
+	char cadena[MAX];
+	int i, palabras = 0, letras = 0, numeros = 0, caracteres = 0;
+	
+	printf("Ingrese una cadena de texto: ");
+	fgets(cadena, MAX, stdin);
+	
+	for (i = 0; cadena[i] != '\0'; i++) {
+		if ((cadena[i] >= 'a' && cadena[i] <= 'z') || (cadena[i] >= 'A' && cadena[i] <= 'Z')) {
+			letras++;
+		} else if (cadena[i] >= '0' && cadena[i] <= '9') {
+			numeros++;
+		} else if (cadena[i] != ' ' && cadena[i] != '\n') {
+			caracteres++;
+		}
+		
+		if (cadena[i] == ' ') {
+			palabras++;
+		}
+	}
+	
+	if (cadena[i - 1] != ' ') {
+		palabras++;
+	}
+	
+	printf("Total de palabras: %d\n", palabras);
+	printf("Total de letras: %d\n", letras);
+	printf("Total de numeros: %d\n", numeros);
+	printf("Total de caracteres especiales: %d\n", caracteres);
+	
+	return 0;
+}
+
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingrese una cadena de texto: juan lopez perez                     
+	Total de palabras: 3
+	Total de letras: 14
+	Total de numeros: 0
+	Total de caracteres especiales: 0
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese una cadena de texto: mi cumple es el 24 de agosto :*D %3$
+	Total de palabras: 9
+	Total de letras: 21
+	Total de numeros: 3
+	Total de caracteres especiales: 4
+	\end{lstlisting}	
+	
+	\newpage
+	
+	\subsection{Problema 3}
+	
+	Programa que solicite al usuario una cadena de texto y muestre la letra que se repite mas veces, incluyendo el numero de repeticiones.
+	
+	\subsubsection{Programa3.c}
+	
+	\begin{lstlisting}
+/**
+* @file Programa3.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-01
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+
+#define MAX 100
+
+int main() {
+	char cadena[MAX];
+	int frecuencia[26] = {0};
+	int repetida[26] = {0};
+	int i, n = 0, m = -1;
+	
+	printf("Ingrese una cadena de texto: ");
+	fgets(cadena, MAX, stdin);
+	
+	for (i = 0; cadena[i] != '\0'; i++) {
+		if ((cadena[i] >= 'a' && cadena[i] <= 'z') || (cadena[i] >= 'A' && cadena[i] <= 'Z')) {
+			if (cadena[i] >= 'a' && cadena[i] <= 'z') {
+				frecuencia[cadena[i] - 'a']++;
+			} else {
+				repetida[cadena[i] - 'A']++;
+			}
+		}
+	}
+	
+	for (i = 0; i < 26; i++) {
+		if (frecuencia[i] + repetida[i] > n) {
+			n = frecuencia[i] + repetida[i];
+			m = i;
+		}
+	}
+	
+	if (m != -1) {
+		printf("La letra que se repite mas veces es '%c', con %d repeticiones.\n", m + 'a', n);
+	} else {
+		printf("No se encontraron letras en la cadena ingresada.\n");
+	}
+	
+	return 0;
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingrese una cadena de texto: julia lopez perez amanda alvarez
+	La letra que se repite mas veces es 'a', con 6 repeticiones.
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese una cadena de texto: 5549456 5459
+	No se encontraron letras en la cadena ingresada.
+	\end{lstlisting}
+	
+	\newpage
+	
+	\subsection{Problema 4}
+	
+	Programa que solicite al usuario una cadena de texto y muestre la palabra mas corta y la palabra mas larga.
+	
+	\subsubsection{Programa4.c}
+	
+	\begin{lstlisting}
+/**
+* @file Programa4.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-01
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+
+#define MAX 100
+
+int main() {
+	char str[MAX];
+	char corta[MAX];
+	char larga[MAX];
+	int l = MAX;
+	int m = 0;
+	int n = 0;
+	int i = 0;
+	
+	printf("Ingresa una cadena de texto: ");
+	fgets(str, MAX, stdin);
+	
+	while (str[i] != '\0') {
+		if (str[i] == ' ' || str[i] == '\n') {
+			if (n < l) {
+				l = n;
+				sscanf(str + i - n, "%s", corta);
+			}
+			if (n > m) {
+				m = n;
+				sscanf(str + i - n, "%s", larga);
+			}
+			n = 0;
+		} else {
+			n++;
+		}
+		i++;
+	}
+	
+	printf("La palabra mas corta es: %s\n", corta);
+	printf("La palabra mas larga es: %s\n", larga);
+	
+	return 0;
+}
+
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingresa una cadena de texto: juan perez lopez alfonso 
+	La palabra mas corta es: juan
+	La palabra mas larga es: alfonso
+	\end{lstlisting}
+	
+	\newpage
+	
+	\subsection{Problema 5}
+	
+	Programa que solicite al usuario un carácter y muestre en pantalla si se trata de una letra mayúscula, minúscula, un numero o un carácter especial.
+	
+	\subsubsection{Programa5.c}
+	
+	\begin{lstlisting}
+/**
+* @file Programa5.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-01
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+
+int main() {
+	char c;
+	
+	printf("Ingresa un caracter: ");
+	scanf("%c", &c);
+	
+	if (c >= 'a' && c <= 'z') {
+		printf("El caracter ingresado es una letra minuscula.\n");
+	} else if (c >= 'A' && c <= 'Z') {
+		printf("El caracter ingresado es una letra mayuscula.\n");
+	} else if (c >= '0' && c <= '9') {
+		printf("El caracter ingresado es un numero.\n");
+	} else {
+		printf("El caracter ingresado es un caracter especial.\n");
+	}
+	
+	return 0;
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingresa un caracter: a
+	El caracter ingresado es una letra minuscula.
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingresa un caracter: 15
+	El caracter ingresado es un numero.
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingresa un caracter: A
+	El caracter ingresado es una letra mayuscula.
+	\end{lstlisting}
+	
+	\newpage
+	
+	\subsection{Problema 6}
+	
+	Programa que solicite al usuario una cadena de texto y muestre el numero de repeticiones de cada una de las letras. El programa no deberá distinguir entres mayúsculas y minúsculas.
+	
+	\subsubsection{Programa6.c}
+	
+	\begin{lstlisting}
+/**
+* @file Programa6.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-01
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+
+#define MAX 100
+
+int main() {
+	char str[MAX];
+	int frecuencia[26] = {0};
+	int i = 0;
+	
+	printf("Ingresa una cadena de texto: ");
+	fgets(str, MAX, stdin);
+	
+	while (str[i] != '\0') {
+		if (str[i] >= 'a' && str[i] <= 'z') {
+			frecuencia[str[i] - 'a']++;
+		} else if (str[i] >= 'A' && str[i] <= 'Z') {
+			frecuencia[str[i] - 'A']++;
+		}
+		i++;
+	}
+	
+	printf("Frecuencia de las letras:\n");
+	for (int j = 0; j < 26; j++) {
+		if (frecuencia[j] > 0) {
+			printf("%c: %d\n", 'a' + j, frecuencia[j]);
+		}
+	}
+	
+	return 0;
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingresa una cadena de texto: sdasdasdsa
+	Frecuencia de las letras:
+	a   3
+	d   3
+	s   4
+	\end{lstlisting}
+	
+	\newpage
+	\section{Conclusión}
+	
+	En resumen, esta práctica sobre el manejo de cadenas en programación ha sido una excelente oportunidad para afianzar mis habilidades en el manejo de estructuras de datos. A través de la realización de diferentes ejercicios, he podido experimentar con diversas técnicas para manipular y procesar cadenas de texto.
+	
+\end{document}
