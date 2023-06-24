@@ -1,0 +1,507 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+
+\geometry{letterpaper, margin = 1.5cm}
+
+
+\newcommand{\codefontsize}{\fontsize{12}{12}}
+
+\lstset{
+	language=C,
+	basicstyle=\ttfamily\color{white},
+	keywordstyle=\color{cyan},
+	commentstyle=\color{lime},
+	stringstyle=\color{red},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=5pt,
+	breaklines=true,
+	showstringspaces=false,
+	frame=tb,
+	columns=fullflexible,
+	backgroundcolor=\color{black},
+}
+
+%Datos de la Portada
+\title{Introducción a la Programación \ Practica 9}
+\author{Medina Martinez Jonathan Jason \ 2023640061}
+\date{12 de junio del 2023}
+
+\begin{document} %Inicio del Documento
+	
+	\fontsize{12}{16}\selectfont
+	
+	\begin{figure}[t] %Logos Portada
+		
+		\includegraphics[width=2.5 cm]{Logo1.jpeg}
+		\hfill
+		\includegraphics[width=3 cm]{Logo2.png}
+		
+	\end{figure}
+	
+	\maketitle %Titulo Portada
+	\newpage
+	
+	\tableofcontents %Indice
+	\newpage
+	
+	\section{Objetivo}
+	
+	Desarrollo de programas utilizando estructuras y archivos como aplicación para las bases de datos.
+	
+	\section{Introducción}
+	
+	El desarrollo de programas utilizando estructuras y archivos como aplicación para las bases de datos es una práctica fundamental en el ámbito de la programación. En esta ocasión, nos enfocaremos en crear un programa en C que permita gestionar una lista de asistencia de alumnos. Para lograr esto, utilizaremos diferentes estructuras, como Alumno, Profesor, Lista y Fecha, que contendrán la información relevante para el registro y seguimiento de la asistencia. Además, implementaremos un archivo binario que nos permitirá almacenar y acceder a los datos de manera aleatoria. Este enfoque nos brinda flexibilidad y eficiencia al momento de gestionar la información de los alumnos y su asistencia. A través de un menú de opciones, los usuarios podrán registrar unidades de aprendizaje, grupos, fechas, profesores, agregar y modificar alumnos, así como mostrar la lista de asistencia. Con esta práctica, adquiriremos conocimientos valiosos sobre el manejo de estructuras, archivos y bases de datos en el contexto de la programación.
+	
+	\newpage
+	
+	\section{Desarrollo}
+	
+	Desarrolle un programa en C que permita tener una lista de asistencia de alumnos.
+	Para esto, deberá crear las siguientes estructuras:
+	
+	\begin{itemize}
+		\item Alumno: Nombre, Numero de Boleta, Año de Ingreso, Carrera, Turno.
+		\item Profesor: Nombre, Numero de Empleado, Turno.
+		\item Lista: Fecha, Unidad de Aprendizaje, Grupo, Profesor, Lista de Alumnos.
+		\item Fecha: Día, Mes, Año.
+	\end{itemize}
+	
+	El programa deberá tener el siguiente menú:
+	
+	\begin{itemize}
+		\item Registrar Unidad de Aprendizaje.
+		\item Registrar Grupo.
+		\item Registrar Fecha.
+		\item Registrar Profesor.
+		\item Agregar Alumno.
+		\item Modificar Alumno.
+		\item Mostrar Lista.
+		\item Salir.
+	\end{itemize}
+	
+	La Lista de Alumnos deberá guardarse en un archivo binario, que permita guardar y acceder a los datos de forma aleatoria. Para esto, podrá utilizar el numero de boleta como un identificador entero consecutivo. No olvide guardar en su archivo los datos del profesor, los datos de la lista y la cantidad de alumnos registrados.
+	
+	\newpage
+	
+	\subsection{Programa.c}
+	
+	\begin{lstlisting}
+/**
+* @file Programa.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-06-23
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+	int dia;
+	int mes;
+	int anio;
+} Fecha;
+
+typedef struct {
+	char nombre[50];
+	int numeroBoleta;
+	int anioIngreso;
+	char carrera[50];
+	char turno;
+} Alumno;
+
+typedef struct {
+	char nombre[50];
+	int numeroEmpleado;
+	char turno;
+} Profesor;
+
+typedef struct {
+	Fecha fecha;
+	char unidadAprendizaje[50];
+	char grupo[10];
+	Profesor profesor;
+	Alumno *alumnos;
+	int cantidadAlumnos;
+} Lista;
+
+void registrarUnidadAprendizaje(Lista *lista);
+void registrarGrupo(Lista *lista);
+void registrarFecha(Lista *lista);
+void registrarProfesor(Lista *lista);
+void agregarAlumno(Lista *lista);
+void modificarAlumno(Lista *lista);
+void mostrarLista(Lista lista);
+void guardarDatos(Lista lista);
+void cargarDatos(Lista *lista);
+
+int main() {
+	Lista lista;
+	lista.alumnos = NULL;
+	lista.cantidadAlumnos = 0;
+	
+	int opcion;
+	
+	cargarDatos(&lista);
+	
+	do {
+		printf("\n==== MENU ====\n");
+		printf("1. Registrar Unidad de Aprendizaje\n");
+		printf("2. Registrar Grupo\n");
+		printf("3. Registrar Fecha\n");
+		printf("4. Registrar Profesor\n");
+		printf("5. Agregar Alumno\n");
+		printf("6. Modificar Alumno\n");
+		printf("7. Mostrar Lista\n");
+		printf("8. Salir\n");
+		printf("Ingrese una opcion: ");
+		scanf("%d", &opcion);
+		
+		switch(opcion) {
+			case 1:
+			registrarUnidadAprendizaje(&lista);
+			break;
+			case 2:
+			registrarGrupo(&lista);
+			break;
+			case 3:
+			registrarFecha(&lista);
+			break;
+			case 4:
+			registrarProfesor(&lista);
+			break;
+			case 5:
+			agregarAlumno(&lista);
+			break;
+			case 6:
+			modificarAlumno(&lista);
+			break;
+			case 7:
+			mostrarLista(lista);
+			break;
+			case 8:
+			guardarDatos(lista);
+			printf("Saliendo del programa...\n");
+			break;
+			default:
+			printf("Opcion invalida. Intente nuevamente.\n");
+		}
+	} while(opcion != 8);
+	
+	free(lista.alumnos);
+	
+	return 0;
+}
+
+void registrarUnidadAprendizaje(Lista *lista) {
+	printf("\n==== REGISTRAR UNIDAD DE APRENDIZAJE ====\n");
+	printf("Ingrese el nombre de la unidad de aprendizaje: ");
+	scanf("%s", lista->unidadAprendizaje);
+}
+
+void registrarGrupo(Lista *lista) {
+	printf("\n==== REGISTRAR GRUPO ====\n");
+	printf("Ingrese el nombre del grupo: ");
+	scanf("%s", lista->grupo);
+}
+
+void registrarFecha(Lista *lista) {
+	printf("\n==== REGISTRAR FECHA ====\n");
+	printf("Ingrese el dia: ");
+	scanf("%d", &lista->fecha.dia);
+	printf("Ingrese el mes: ");
+	scanf("%d", &lista->fecha.mes);
+	printf("Ingrese el anio: ");
+	scanf("%d", &lista->fecha.anio);
+}
+
+void registrarProfesor(Lista *lista) {
+	printf("\n==== REGISTRAR PROFESOR ====\n");
+	printf("Ingrese el nombre del profesor: ");
+	scanf("%s", lista->profesor.nombre);
+	printf("Ingrese el numero de empleado: ");
+	scanf("%d", &lista->profesor.numeroEmpleado);
+	printf("Ingrese el turno (M-maniana, T-tarde, N-noche): ");
+	scanf(" %c", &lista->profesor.turno);
+}
+
+void agregarAlumno(Lista *lista) {
+	printf("\n==== AGREGAR ALUMNO ====\n");
+	
+	lista->cantidadAlumnos++;
+	lista->alumnos = (Alumno*)realloc(lista->alumnos, lista->cantidadAlumnos * sizeof(Alumno));
+	
+	Alumno *alumno = &lista->alumnos[lista->cantidadAlumnos - 1];
+	
+	printf("Ingrese el nombre del alumno: ");
+	scanf("%s", alumno->nombre);
+	printf("Ingrese el numero de boleta: ");
+	scanf("%d", &alumno->numeroBoleta);
+	printf("Ingrese el anio de ingreso: ");
+	scanf("%d", &alumno->anioIngreso);
+	printf("Ingrese la carrera: ");
+	scanf("%s", alumno->carrera);
+	printf("Ingrese el turno (M-maniana, T-tarde, N-noche): ");
+	scanf(" %c", &alumno->turno);
+}
+
+void modificarAlumno(Lista *lista) {
+	printf("\n==== MODIFICAR ALUMNO ====\n");
+	
+	int numeroBoleta;
+	printf("Ingrese el numero de boleta del alumno a modificar: ");
+	scanf("%d", &numeroBoleta);
+	
+	int encontrado = 0;
+	
+	for (int i = 0; i < lista->cantidadAlumnos; i++) {
+		if (lista->alumnos[i].numeroBoleta == numeroBoleta) {
+			printf("Ingrese el nuevo nombre del alumno: ");
+			scanf("%s", lista->alumnos[i].nombre);
+			printf("Ingrese el nuevo anio de ingreso: ");
+			scanf("%d", &lista->alumnos[i].anioIngreso);
+			printf("Ingrese la nueva carrera: ");
+			scanf("%s", lista->alumnos[i].carrera);
+			printf("Ingrese el nuevo turno (M-maniana, T-tarde, N-noche): ");
+			scanf(" %c", &lista->alumnos[i].turno);
+			
+			encontrado = 1;
+			break;
+		}
+	}
+	
+	if (!encontrado) {
+		printf("Alumno no encontrado.\n");
+	}
+}
+
+void mostrarLista(Lista lista) {
+	printf("\n==== LISTA DE ASISTENCIA ====\n");
+	
+	printf("Fecha: %02d/%02d/%04d\n", lista.fecha.dia, lista.fecha.mes, lista.fecha.anio);
+	printf("Unidad de Aprendizaje: %s\n", lista.unidadAprendizaje);
+	printf("Grupo: %s\n", lista.grupo);
+	printf("Profesor: %s\n", lista.profesor.nombre);
+	printf("Numero de empleado del profesor: %d\n", lista.profesor.numeroEmpleado);
+	printf("Turno del profesor: %c\n", lista.profesor.turno);
+	
+	printf("\nAlumnos:\n");
+	printf("%-20s %-15s %-10s %-10s\n", "Nombre", "Num. Boleta", "Anio Ingreso", "Carrera");
+	
+	for (int i = 0; i < lista.cantidadAlumnos; i++) {
+		Alumno alumno = lista.alumnos[i];
+		printf("%-20s %-15d %-10d %-10s\n", alumno.nombre, alumno.numeroBoleta, alumno.anioIngreso, alumno.carrera);
+	}
+}
+
+void guardarDatos(Lista lista) {
+	FILE *archivo = fopen("lista_alumnos.bin", "wb");
+	
+	if (archivo == NULL) {
+		printf("Error al abrir el archivo.\n");
+		return;
+	}
+	
+	fwrite(&lista.fecha, sizeof(Fecha), 1, archivo);
+	fwrite(lista.unidadAprendizaje, sizeof(char), sizeof(lista.unidadAprendizaje), archivo);
+	fwrite(lista.grupo, sizeof(char), sizeof(lista.grupo), archivo);
+	fwrite(&lista.profesor, sizeof(Profesor), 1, archivo);
+	fwrite(&lista.cantidadAlumnos, sizeof(int), 1, archivo);
+	fwrite(lista.alumnos, sizeof(Alumno), lista.cantidadAlumnos, archivo);
+	
+	fclose(archivo);
+}
+
+void cargarDatos(Lista *lista) {
+	FILE *archivo = fopen("lista_alumnos.bin", "rb");
+	
+	if (archivo == NULL) {
+		printf("No se encontro el archivo. Se creara uno nuevo.\n");
+		return;
+	}
+	
+	fread(&lista->fecha, sizeof(Fecha), 1, archivo);
+	fread(lista->unidadAprendizaje, sizeof(char), sizeof(lista->unidadAprendizaje), archivo);
+	fread(lista->grupo, sizeof(char), sizeof(lista->grupo), archivo);
+	fread(&lista->profesor, sizeof(Profesor), 1, archivo);
+	fread(&lista->cantidadAlumnos, sizeof(int), 1, archivo);
+	
+	lista->alumnos = (Alumno*)malloc(lista->cantidadAlumnos * sizeof(Alumno));
+	fread(lista->alumnos, sizeof(Alumno), lista->cantidadAlumnos, archivo);
+	
+	fclose(archivo);
+}
+	\end{lstlisting}
+	
+	\newpage
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	No se encontro el archivo. Se creara uno nuevo.
+	
+	==== MENU ====
+	1. Registrar Unidad de Aprendizaje
+	2. Registrar Grupo
+	3. Registrar Fecha
+	4. Registrar Profesor
+	5. Agregar Alumno
+	6. Modificar Alumno
+	7. Mostrar Lista
+	8. Salir
+	Ingrese una opcion: 1
+	
+	==== REGISTRAR UNIDAD DE APRENDIZAJE ====
+	Ingrese el nombre de la unidad de aprendizaje: algebra
+	
+	==== MENU ====
+	1. Registrar Unidad de Aprendizaje
+	2. Registrar Grupo
+	3. Registrar Fecha
+	4. Registrar Profesor
+	5. Agregar Alumno
+	6. Modificar Alumno
+	7. Mostrar Lista
+	8. Salir
+	Ingrese una opcion: 2
+	
+	==== REGISTRAR GRUPO ====
+	Ingrese el nombre del grupo: 1mv3
+	
+	==== MENU ====
+	1. Registrar Unidad de Aprendizaje
+	2. Registrar Grupo
+	3. Registrar Fecha
+	4. Registrar Profesor
+	5. Agregar Alumno
+	6. Modificar Alumno
+	7. Mostrar Lista
+	8. Salir
+	Ingrese una opcion: 3
+	
+	==== REGISTRAR FECHA ====
+	Ingrese el dia: 12
+	Ingrese el mes: 06
+	Ingrese el anio: 2023
+	
+	==== MENU ====
+	1. Registrar Unidad de Aprendizaje
+	2. Registrar Grupo
+	3. Registrar Fecha
+	4. Registrar Profesor
+	5. Agregar Alumno
+	6. Modificar Alumno
+	7. Mostrar Lista
+	8. Salir
+	Ingrese una opcion: 4
+	
+	==== REGISTRAR PROFESOR ====
+	Ingrese el nombre del profesor: jose luis
+	Ingrese el numero de empleado: Ingrese el turno (M-maniana, T-tarde, N-noche):
+	==== MENU ====
+	1. Registrar Unidad de Aprendizaje
+	2. Registrar Grupo
+	3. Registrar Fecha
+	4. Registrar Profesor
+	5. Agregar Alumno
+	6. Modificar Alumno
+	7. Mostrar Lista
+	8. Salir
+	Ingrese una opcion:
+	==== REGISTRAR PROFESOR ====
+	Ingrese el nombre del profesor: Ingrese el numero de empleado: 12
+	Ingrese el turno (M-maniana, T-tarde, N-noche): T
+	
+	==== MENU ====
+	1. Registrar Unidad de Aprendizaje
+	2. Registrar Grupo
+	3. Registrar Fecha
+	4. Registrar Profesor
+	5. Agregar Alumno
+	6. Modificar Alumno
+	7. Mostrar Lista
+	8. Salir
+	Ingrese una opcion: 5
+	
+	==== AGREGAR ALUMNO ====
+	Ingrese el nombre del alumno: jonathan
+	Ingrese el numero de boleta: 2023640061
+	Ingrese el anio de ingreso: 2023
+	Ingrese la carrera: mecatronica
+	Ingrese el turno (M-maniana, T-tarde, N-noche): T
+	
+	==== MENU ====
+	1. Registrar Unidad de Aprendizaje
+	2. Registrar Grupo
+	3. Registrar Fecha
+	4. Registrar Profesor
+	5. Agregar Alumno
+	6. Modificar Alumno
+	7. Mostrar Lista
+	8. Salir
+	Ingrese una opcion: 6
+	
+	==== MODIFICAR ALUMNO ====
+	Ingrese el numero de boleta del alumno a modificar: 2023640061
+	Ingrese el nuevo nombre del alumno: jonathan
+	Ingrese el nuevo anio de ingreso: 2022
+	Ingrese la nueva carrera: mecatronica
+	Ingrese el nuevo turno (M-maniana, T-tarde, N-noche): M
+	
+	==== MENU ====
+	1. Registrar Unidad de Aprendizaje
+	2. Registrar Grupo
+	3. Registrar Fecha
+	4. Registrar Profesor
+	5. Agregar Alumno
+	6. Modificar Alumno
+	7. Mostrar Lista
+	8. Salir
+	Ingrese una opcion: 7
+	
+	==== LISTA DE ASISTENCIA ====
+	Fecha: 12/06/2023
+	Unidad de Aprendizaje: algebra
+	Grupo: 1mv3
+	Profesor: uis
+	Numero de empleado del profesor: 12
+	Turno del profesor: T
+	
+	Alumnos:
+	Nombre               Num. Boleta     Anio Ingreso Carrera
+	jonathan             2023640061      2022       mecatronica
+	
+	==== MENU ====
+	1. Registrar Unidad de Aprendizaje
+	2. Registrar Grupo
+	3. Registrar Fecha
+	4. Registrar Profesor
+	5. Agregar Alumno
+	6. Modificar Alumno
+	7. Mostrar Lista
+	8. Salir
+	Ingrese una opcion: 8
+	Saliendo del programa...
+	\end{lstlisting}
+	
+	\newpage
+	
+	\section{Conclusión}
+	
+	En conclusión, el desarrollo de programas que utilicen estructuras y archivos como aplicación para las bases de datos es una habilidad fundamental en el ámbito de la programación. En esta práctica, hemos logrado crear un programa en C que nos permite gestionar una lista de asistencia de alumnos de manera eficiente y flexible. Mediante el uso de estructuras como Alumno, Profesor, Lista y Fecha, hemos sido capaces de almacenar y acceder a los datos relevantes para el registro y seguimiento de la asistencia. Además, gracias al archivo binario implementado, hemos logrado guardar y recuperar la información de forma aleatoria, aprovechando el número de boleta como identificador único. Esta práctica nos ha brindado la oportunidad de adquirir conocimientos valiosos sobre el manejo de estructuras, archivos y bases de datos en el contexto de la programación. Con estas habilidades, estaremos preparados para enfrentar desafíos más complejos en el desarrollo de aplicaciones que requieran gestionar grandes volúmenes de datos y garantizar un acceso eficiente a los mismos.
+	
+\end{document}

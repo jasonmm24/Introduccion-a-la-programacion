@@ -1,0 +1,873 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+
+\geometry{letterpaper, margin = 1.5cm}
+
+
+\newcommand{\codefontsize}{\fontsize{12}{12}}
+
+\lstset{
+	language=C,
+	basicstyle=\ttfamily\color{white},
+	keywordstyle=\color{cyan},
+	commentstyle=\color{lime},
+	stringstyle=\color{red},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=5pt,
+	breaklines=true,
+	showstringspaces=false,
+	frame=tb,
+	columns=fullflexible,
+	backgroundcolor=\color{black},
+}
+
+%Datos de la Portada
+\title{Introducción a la Programación \ Practica 7}
+\author{Medina Martinez Jonathan Jason \ 2023640061}
+\date{20 de mayo del 2023}
+
+\begin{document} %Inicio del Documento
+	
+	\fontsize{12}{16}\selectfont
+	
+	\begin{figure}[t] %Logos Portada
+		
+		\includegraphics[width=2.5 cm]{Logo1.jpeg}
+		\hfill
+		\includegraphics[width=3 cm]{Logo2.png}
+		
+	\end{figure}
+	
+	\maketitle %Titulo Portada
+	\newpage
+	
+	\tableofcontents %Indice
+	\newpage
+	
+	\section{Objetivo}
+	
+	Desarrollo de programas utilizando los apuntadores para el paso de parámetros por valor y por referencia a funciones.
+	
+	\section{Introducción}
+	
+	La programación es una herramienta fundamental en el desarrollo de software, y el dominio de conceptos avanzados como el uso de apuntadores resulta esencial para optimizar el rendimiento y la eficiencia de los programas. En esta práctica, nos enfocaremos en el uso de apuntadores para el paso de parámetros por valor y por referencia a funciones. El objetivo principal es desarrollar programas que utilicen apuntadores de manera efectiva para realizar operaciones como la suma de números, la manipulación de arreglos y el procesamiento de cadenas de caracteres. A lo largo de esta práctica, exploraremos diversos ejercicios que nos permitirán familiarizarnos con el manejo adecuado de apuntadores.
+	
+	\newpage
+	\section{Desarrollo}
+	
+	\subsection{Problema 1}
+	
+	Programa que solicite al usuario dos números y devuelva la suma de los mismos, utilizando punteros.
+	
+	\subsubsection{Programa1.c}
+	
+	\begin{lstlisting}
+/**
+* @file Programa1.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-19
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+
+void sumarNumeros(int num1, int num2, int *resultado);
+
+int main() {
+	int num1, num2, resultado;
+	
+	printf("Ingrese el primer numero: ");
+	scanf("%d", &num1);
+	printf("Ingrese el segundo numero: ");
+	scanf("%d", &num2);
+	
+	sumarNumeros(num1, num2, &resultado);
+	
+	printf("La suma es: %d\n", resultado);
+	
+	return 0;
+}
+
+/// @brief Funcion que suma dos numeros utulizando punteros.
+/// @param num1 El primer numero.
+/// @param num2 El segundo numero.
+/// @param resultado El resultado.
+void sumarNumeros(int num1, int num2, int *resultado) {
+	*resultado = num1 + num2;
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 5
+	Ingrese el segundo numero: 20
+	La suma es: 25
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 5
+	Ingrese el segundo numero: 16
+	La suma es: 21
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 10
+	Ingrese el segundo numero: 18
+	La suma es: 28
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 12
+	Ingrese el segundo numero: 96
+	La suma es: 108
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 175
+	Ingrese el segundo numero: 236
+	La suma es: 411
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 892
+	Ingrese el segundo numero: 568
+	La suma es: 1460
+	\end{lstlisting}
+	
+	\newpage
+	
+	\subsection{Problema 2}
+	
+	Programa que solicite al usuario dos números y devuelva la suma de los mismos, utilizando paso de parámetros por referencia.
+	
+	\subsubsection{Programa2.c}
+	
+	\begin{lstlisting}
+/**
+* @file Programa2.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-19
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+
+void sumarNumeros(int *num1, int *num2, int *resultado);
+
+int main() {
+	int num1, num2, resultado;
+	
+	printf("Ingrese el primer numero: ");
+	scanf("%d", &num1);
+	
+	printf("Ingrese el segundo numero: ");
+	scanf("%d", &num2);
+	
+	sumarNumeros(&num1, &num2, &resultado);
+	
+	printf("La suma es: %d\n", resultado);
+	
+	return 0;
+}
+
+/// @brief Funcion que suma dos numeros utulizando punteros.
+/// @param num1 El primer numero.
+/// @param num2 El segundo numero.
+/// @param resultado El resultado.
+void sumarNumeros(int *num1, int *num2, int *resultado) {
+	*resultado = *num1 + *num2;
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 10
+	Ingrese el segundo numero: 15
+	La suma es: 25
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 23
+	Ingrese el segundo numero: 65
+	La suma es: 88
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 56
+	Ingrese el segundo numero: 87
+	La suma es: 143
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 1236
+	Ingrese el segundo numero: 1458
+	La suma es: 2694
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 789
+	Ingrese el segundo numero: 254 
+	La suma es: 1043
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese el primer numero: 457
+	Ingrese el segundo numero: 159
+	La suma es: 616
+	\end{lstlisting}
+	
+	\newpage
+	
+	\subsection{Problema 3}
+	
+	Programa que solicite al usuario n cantidad de números que sean almacenados en un arreglo e imprima el contenido del arreglo utilizando un puntero.
+	
+	\subsubsection{Programa3.c}
+	
+	\begin{lstlisting}
+
+/**
+* @file Programa3.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-20
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+	int n;
+	
+	printf("Ingrese la cantidad de numeros a almacenar: ");
+	scanf("%d", &n);
+	
+	int *arreglo = (int *)malloc(n * sizeof(int));
+	
+	if (arreglo == NULL) {
+		
+		printf("Error al asignar memoria.");
+		
+		return 1;
+		
+	}
+	
+	printf("Ingrese los numeros:\n");
+	
+	for (int i = 0; i < n; i++) {
+		
+		scanf("%d", arreglo + i);
+		
+	}
+	
+	printf("Contenido del arreglo:\n");
+	
+	for (int i = 0; i < n; i++) {
+		
+		printf("%d ", *(arreglo + i));
+		
+	}
+	
+	free(arreglo);
+	
+	return 0;
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros a almacenar: 10
+	Ingrese los numeros:
+	1
+	1
+	156
+	21
+	242
+	54
+	57
+	64
+	57
+	54
+	Contenido del arreglo:
+	1 1 156 21 242 54 57 64 57 54
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros a almacenar: 1000000000000000000000
+	Error al asignar memoria.
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros a almacenar: 7
+	Ingrese los numeros:
+	15
+	25
+	78
+	98
+	63
+	32
+	45
+	Contenido del arreglo:
+	15 25 78 98 63 32 45 
+	\end{lstlisting}
+	
+	\subsection{Problema 4}
+	
+	Usando memoria dinámica, escriba un programa que solicite n números al usuario y devuelva el número más grande.
+	
+	\subsubsection{Programa4.c}
+	
+	\begin{lstlisting}
+
+/**
+* @file Programa4.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-20
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+	int n;
+	
+	printf("Ingrese la cantidad de numeros: ");
+	scanf("%d", &n);
+	
+	int *numeros = (int *)malloc(n * sizeof(int));
+	
+	if (numeros == NULL) {
+		
+		printf("Error al asignar memoria.");
+		
+		return 1;
+		
+	}
+	
+	printf("Ingrese los numeros:\n");
+	
+	for (int i = 0; i < n; i++) {
+		
+		scanf("%d", numeros + i);
+		
+	}
+	
+	int maximo = *numeros;
+	
+	for (int i = 1; i < n; i++) {
+		
+		if (*(numeros + i) > maximo) {
+			
+			maximo = *(numeros + i);
+			
+		}
+		
+	}
+	
+	printf("El numero mas grande es: %d\n", maximo);
+	
+	free(numeros);
+	
+	return 0;
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros: 8
+	Ingrese los numeros:
+	12
+	32
+	25
+	23
+	26
+	52
+	36
+	15
+	El numero mas grande es: 52
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros: 5
+	Ingrese los numeros:
+	15
+	995
+	559
+	1175
+	45
+	El numero mas grande es: 1175
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros: 1000000000000000000
+	Error al asignar memoria.
+	\end{lstlisting}
+	
+	\subsection{Problema 5}
+	
+	Programa que solicite al usuario una cadena y cuente el total de vocales y consonantes utilizando punteros.
+	
+	\subsubsection{Programa5.c}
+	
+	\begin{lstlisting}
+/**
+* @file Programa5.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-20
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+
+int contarVocalesConsonantes(char *cadena, int *vocales, int *consonantes);
+
+int main() {
+	char cadena[100];
+	int vocales, consonantes, total;
+	
+	printf("Ingrese una cadena: ");
+	fgets(cadena, sizeof(cadena), stdin);
+	
+	total = contarVocalesConsonantes(cadena, &vocales, &consonantes);
+	
+	printf("Cantidad de vocales: %d\n", vocales);
+	printf("Cantidad de consonantes: %d\n", consonantes);
+	printf("Total de caracteres: %d\n", total);
+	
+	return 0;
+}
+
+/// @brief Funcion que cuenta el numero de vocales y consonantes en una cadena de caracteres.
+/// @param cadena La cadena de caracteres.
+/// @param vocales Un puntero para almacenar el conteo de vocales.
+/// @param consonantes Un puntero para almacenar el conteo de consonantes.
+/// @return El total de caracteres (suma de vocales y consonantes).
+int contarVocalesConsonantes(char *cadena, int *vocales, int *consonantes) {
+	*vocales = 0;
+	*consonantes = 0;
+	
+	while (*cadena != '\0') {
+		if (*cadena == 'a' || *cadena == 'e' || *cadena == 'i' || *cadena == 'o' || *cadena == 'u' ||
+		*cadena == 'A' || *cadena == 'E' || *cadena == 'I' || *cadena == 'O' || *cadena == 'U') {
+			(*vocales)++;
+		} else if ((*cadena >= 'a' && *cadena <= 'z') || (*cadena >= 'A' && *cadena <= 'Z')) {
+			(*consonantes)++;
+		}
+		cadena++;
+	}
+	
+	return (*vocales + *consonantes);
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingrese una cadena: Hola Mundo
+	Cantidad de vocales: 4
+	Cantidad de consonantes: 5
+	Total de caracteres: 9
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese una cadena: Jonathan Jason Medina Martinez
+	Cantidad de vocales: 11
+	Cantidad de consonantes: 16
+	Total de caracteres: 27
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese una cadena: ASDkfkdsmfkssdfaJAFKJJAfdfks
+	Cantidad de vocales: 4
+	Cantidad de consonantes: 24
+	Total de caracteres: 28
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese una cadena: huask asjfjadknf asASnJSf akasfa
+	Cantidad de vocales: 9
+	Cantidad de consonantes: 20
+	Total de caracteres: 29
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese una cadena: asfmlamfaasfal lasflma
+	Cantidad de vocales: 7
+	Cantidad de consonantes: 14
+	Total de caracteres: 21
+	\end{lstlisting}
+	
+	\subsection{Problema 6}
+	
+	Programa que genere un arreglo de n números pseudoaleatorios entre -1000 y 1000, donde n será proporcionado por el usuario. Enseguida, proceda a ordenar el arreglo de menor a mayor. Deberá utilizar memoria dinámica y punteros.
+	
+	\subsubsection{Programa6.c}
+	
+	\begin{lstlisting}
+	/**
+	* @file Programa6.c
+	* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+	* @brief 
+	* @version 0.1
+	* @date 2023-05-20
+	* 
+	* @copyrigth GPlv3
+	* 
+	*/
+	
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <time.h>
+	
+	void generarNumerosAleatorios(int *arreglo, int n);
+	
+	void ordenarArreglo(int *arreglo, int n);
+	
+	void imprimirArreglo(int *arreglo, int n);
+	
+	int main() {
+		int n;
+		int *arreglo;
+		
+		printf("Ingrese la cantidad de numeros a generar: ");
+		scanf("%d", &n);
+		
+		arreglo = (int *)malloc(n * sizeof(int));
+		
+		if (arreglo == NULL) {
+			printf("Error al asignar memoria.");
+			return 1;
+		}
+		
+		generarNumerosAleatorios(arreglo, n);
+		
+		printf("Arreglo generado:\n");
+		imprimirArreglo(arreglo, n);
+		
+		ordenarArreglo(arreglo, n);
+		
+		printf("Arreglo ordenado:\n");
+		imprimirArreglo(arreglo, n);
+		
+		free(arreglo);
+		
+		return 0;
+	}
+	
+	/// @brief Genera numeros pseudoaleatorios y los almacena en un arreglo.
+	/// @param arreglo El arreglo donde se almacenaran los numeros generados.
+	/// @param n La cantidad de numeros a generar.
+	void generarNumerosAleatorios(int *arreglo, int n) {
+		srand(time(NULL));
+		
+		for (int i = 0; i < n; i++) {
+			arreglo[i] = rand() % 2001 - 1000;
+		}
+	}
+	
+	/// @brief Ordena un arreglo de menor a mayor.
+	/// @param arreglo El arreglo a ordenar.
+	/// @param n La longitud del arreglo.
+	void ordenarArreglo(int *arreglo, int n) {
+		int *p, *q, temp;
+		
+		for (p = arreglo; p < arreglo + n - 1; p++) {
+			for (q = p + 1; q < arreglo + n; q++) {
+				if (*p > *q) {
+					temp = *p;
+					*p = *q;
+					*q = temp;
+				}
+			}
+		}
+	}
+	
+	/// @brief Imprime los elementos de un arreglo.
+	/// @param arreglo El arreglo a imprimir.
+	/// @param n La longitud del arreglo.
+	void imprimirArreglo(int *arreglo, int n) {
+		for (int i = 0; i < n; i++) {
+			printf("%d ", arreglo[i]);
+		}
+		printf("\n");
+	}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros a generar: 10
+	Arreglo generado:
+	-989 784 85 -231 -502 248 -267 309 137 384 
+	Arreglo ordenado:
+	-989 -502 -267 -231 85 137 248 309 384 784 
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros a generar: 15
+	Arreglo generado:
+	-967 482 65 -382 -591 970 -491 580 654 120 359 478 1000 -724 -887 
+	Arreglo ordenado:
+	-967 -887 -724 -591 -491 -382 65 120 359 478 482 580 654 970 1000 
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros a generar: 4
+	Arreglo generado:
+	-333 527 310 838
+	Arreglo ordenado:
+	-333 310 527 838
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros a generar: 12
+	Arreglo generado:
+	-255 -902 -935 540 -248 -974 -100 -967 -297 -673 883 75
+	Arreglo ordenado:
+	-974 -967 -935 -902 -673 -297 -255 -248 -100 75 540 883
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros a generar: 7
+	Arreglo generado:
+	-127 306 -365 -506 49 334 219
+	Arreglo ordenado:
+	-506 -365 -127 49 219 306 334
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros a generar: 9
+	Arreglo generado:
+	-13 -708 288 -253 611 695 845 -215 -860
+	Arreglo ordenado:
+	-860 -708 -253 -215 -13 288 611 695 845
+	\end{lstlisting}
+	
+	\newpage
+	
+	\subsection{Problema 7}
+	
+	Programa que solicite al usuario n números que serán almacenados en un arreglo, y devuelva la suma de todos los elementos del arreglo, utilizando punteros.
+	
+	\subsubsection{Programa7.c}
+	
+	\begin{lstlisting}
+/**
+* @file Programa7.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-20
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int calcularSuma(int *arreglo, int n);
+
+int main() {
+	int n;
+	
+	printf("Ingrese la cantidad de numeros: ");
+	scanf("%d", &n);
+	
+	int *arreglo = (int *)malloc(n * sizeof(int));
+	
+	if (arreglo == NULL) {
+		printf("Error al asignar memoria.\n");
+		return 1;
+	}
+	
+	printf("Ingrese los numeros:\n");
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &arreglo[i]);
+	}
+	
+	int suma = calcularSuma(arreglo, n);
+	
+	printf("La suma de los numeros es: %d\n", suma);
+	
+	free(arreglo);
+	
+	return 0;
+}
+
+/// @brief Calcula la suma de los elementos de un arreglo.
+/// @param arreglo El arreglo de numeros.
+/// @param n La longitud del arreglo.
+/// @return La suma de los elementos del arreglo.
+int calcularSuma(int *arreglo, int n) {
+	int suma = 0;
+	int *p = arreglo;
+	
+	for (int i = 0; i < n; i++) {
+		suma += *p;
+		p++;
+	}
+	
+	return suma;
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros: 10000000000000000
+	Error al asignar memoria.
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros: 8
+	Ingrese los numeros:
+	15
+	151
+	574
+	85
+	586
+	75457
+	5575
+	57
+	La suma de los numeros es: 82500
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Ingrese la cantidad de numeros: 4
+	Ingrese los numeros:
+	155882
+	282254845
+	629
+	2585956
+	La suma de los numeros es: 284997312
+	\end{lstlisting}
+	
+	\subsection{Problema 8}
+	
+	Programa que permita al usuario escribir un texto del tamaño que desee, que será almacenado en un arreglo de caracteres. Una vez que el usuario presione punto (.), el programa deberá imprimir el contenido del arreglo y terminar. Para esto, deberá utilizar memoria dinámica.
+	
+	\subsubsection{Programa8.c}
+	
+	\begin{lstlisting}
+/**
+* @file Programa8.c
+* @author Medina Martinez Jonathan Jason (jmedinam1702@alumno.ipn.mx)
+* @brief 
+* @version 0.1
+* @date 2023-05-21
+* 
+* @copyrigth GPlv3
+* 
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_LENGTH 1000
+
+int main() {
+	char *texto = (char *)malloc(MAX_LENGTH * sizeof(char));
+	
+	if (texto == NULL) {
+		printf("Error al asignar memoria.\n");
+		return 1;
+	}
+	
+	printf("Escriba un texto (presione punto para finalizar):\n");
+	
+	char *p = texto;
+	char c;
+	
+	while ((c = getchar()) != '.') {
+		*p = c;
+		p++;
+		
+		if (p - texto >= MAX_LENGTH - 1) {
+			printf("Tamanio maximo alcanzado. Se truncara el texto.\n");
+			break;
+		}
+	}
+	
+	*p = '\0';
+	
+	printf("Texto ingresado:\n%s\n", texto);
+	
+	free(texto);
+	
+	return 0;
+}
+	\end{lstlisting}
+	
+	\subsubsection{Ejecución}
+	
+	\begin{lstlisting}
+	Escriba un texto (presione punto para finalizar):
+	Hola mundo.
+	Texto ingresado:
+	Hola mundo
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Escriba un texto (presione punto para finalizar):
+	juan lopez gonzales. hola
+	Texto ingresado:
+	juan lopez gonzales
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Escriba un texto (presione punto para finalizar):
+	gnfsnndkngksdkgs gsdkkmsdgs dgdsgjdskgjds gsdjgs. sdjfigndsjjdng gsgdsg
+	Texto ingresado:
+	gnfsnndkngksdkgs gsdkkmsdgs dgdsgjdskgjds gsdjgs
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+	Escriba un texto (presione punto para finalizar):
+	kdafdskmflks dfksnkg dmkfmksdgls dsomgsdkg sdgds.gsdgksdngkmsdg
+	Texto ingresado:
+	kdafdskmflks dfksnkg dmkfmksdgls dsomgsdkg sdgds
+	\end{lstlisting}
+	
+	\newpage
+	\section{Conclusión}
+	
+	En conclusión, en esta práctica hemos adquirido experiencia en el uso de apuntadores en el desarrollo de programas. Hemos explorado la utilidad de los apuntadores al realizar operaciones como la suma de números, la manipulación de arreglos, la búsqueda del número más grande, el procesamiento de cadenas de caracteres, entre otros. A través de ejercicios prácticos, hemos comprendido cómo los apuntadores nos permiten acceder y modificar directamente la memoria de un programa, lo que resulta en un mejor rendimiento y eficiencia en la ejecución de tareas.
+	
+\end{document}
