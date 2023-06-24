@@ -1,0 +1,15 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Objetivo}{3}{}%
+\contentsline {section}{\numberline {2}Introducción}{3}{}%
+\contentsline {section}{\numberline {3}Desarrollo}{4}{}%
+\contentsline {subsection}{\numberline {3.1}Burbuja}{4}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Código 1}{4}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Ejecución}{6}{}%
+\contentsline {subsection}{\numberline {3.2}Calculadora de Matrices}{7}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Código 2}{7}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Ejecución}{9}{}%
+\contentsline {subsection}{\numberline {3.3}Sistema de Ecuaciones}{10}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}Código 3}{10}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}Código 3 Modificado}{11}{}%
+\contentsline {subsubsection}{\numberline {3.3.3}Ejecución}{12}{}%
+\contentsline {section}{\numberline {4}Conclusión}{13}{}%
